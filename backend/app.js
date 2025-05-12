@@ -47,11 +47,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-<<<<<<< HEAD
-const PORT = process.env.PORT || 3000; // Render will use process.env.PORT
-=======
 const PORT = process.env.PORT || 3000; 
->>>>>>> 85dfb26c65e14d7bca91fee8b271e5afe6248851
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
