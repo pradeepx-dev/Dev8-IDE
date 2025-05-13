@@ -210,49 +210,52 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center px-[100px] justify-between mt-5 font-medium">
-        <h3 className='text-2xl'>Hi, {username || "User"}</h3>
+      {/* Responsive padding for different screen sizes */}
+      <div className="flex flex-col sm:flex-row items-center px-4 sm:px-6 md:px-10 lg:px-[100px] justify-between mt-5 font-medium">
+        <h3 className='text-xl sm:text-2xl mb-4 sm:mb-0'>Hi, {username || "User"}</h3>
         <div className="flex items-center">
           <button onClick={() => { setIsCreateModelShow(true) }} className="btnNormal bg-blue-500 transition-all hover:bg-blue-600">Create Project</button>
         </div>
       </div>
 
-      <div className="projects px-[100px] mt-5 pb-10">
+      {/* Responsive padding for projects container */}
+      <div className="projects px-4 sm:px-6 md:px-10 lg:px-[100px] mt-5 pb-10">
 
         {
           projects && projects.length > 0 ? projects.map((project, index) => {
             return <>
-              <div className="project w-full p-[15px] flex items-center justify-between bg-[#111827] p-3 rounded-lg shadow-md border border-gray-800">
-                <div onClick={() => { navigate("/editior/" + project._id) }} className='flex w-full items-center gap-[15px]'>
+              {/* Responsive project card */}
+              <div className="project w-full p-3 sm:p-[15px] flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[#111827] rounded-lg shadow-md border border-gray-800 mb-4">
+                <div onClick={() => { navigate("/editior/" + project._id) }} className='flex flex-col sm:flex-row w-full items-center gap-2 sm:gap-[15px]'>
                   {
                     project.projLanguage === "python" ?
                       <>
-                        <img className='w-[130px] h-[100px] object-cover' src="https://images.ctfassets.net/em6l9zw4tzag/oVfiswjNH7DuCb7qGEBPK/b391db3a1d0d3290b96ce7f6aacb32b0/python.png" alt="" />
+                        <img className='w-16 h-16 sm:w-[90px] sm:h-[80px] md:w-[130px] md:h-[100px] object-cover' src="https://images.ctfassets.net/em6l9zw4tzag/oVfiswjNH7DuCb7qGEBPK/b391db3a1d0d3290b96ce7f6aacb32b0/python.png" alt="" />
                       </>
                       : project.projLanguage === "javascript" ?
                         <>
-                          <img className='w-[90px] h-[100px] object-cover mr-[20px] ml-[20px]' src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="" />
+                          <img className='w-16 h-16 sm:w-[90px] sm:h-[80px] md:w-[90px] md:h-[100px] object-cover sm:mr-[20px] sm:ml-[20px]' src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="" />
                         </> : project.projLanguage === "cpp" ?
                           <>
-                            <img className='w-[90px] h-[100px] object-cover mr-[20px] ml-[20px]' src="https://upload.wikimedia.org/wikipedia/commons/3/32/C%2B%2B_logo.png" alt="" />
+                            <img className='w-16 h-16 sm:w-[90px] sm:h-[80px] md:w-[90px] md:h-[100px] object-cover sm:mr-[20px] sm:ml-[20px]' src="https://upload.wikimedia.org/wikipedia/commons/3/32/C%2B%2B_logo.png" alt="" />
                           </> : project.projLanguage === "c" ?
                             <>
-                              <img className='w-[90px] h-[100px] object-cover mr-[20px] ml-[20px]' src="https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png" alt="" />
+                              <img className='w-16 h-16 sm:w-[90px] sm:h-[80px] md:w-[90px] md:h-[100px] object-cover sm:mr-[20px] sm:ml-[20px]' src="https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png" alt="" />
                             </> : project.projLanguage === "java" ?
                               <>
-                                <img className='w-[90px] h-[100px] object-cover mr-[20px] ml-[20px]' src="https://static-00.iconduck.com/assets.00/java-icon-1511x2048-6ikx8301.png" alt="" />
+                                <img className='w-16 h-16 sm:w-[90px] sm:h-[80px] md:w-[90px] md:h-[100px] object-cover sm:mr-[20px] sm:ml-[20px]' src="https://static-00.iconduck.com/assets.00/java-icon-1511x2048-6ikx8301.png" alt="" />
                               </> : project.projLanguage === "bash" ?
                                 <>
-                                  <img className='w-[90px] h-[100px] object-cover mr-[20px] ml-[20px]' src="https://img.icons8.com/color/512/bash.png" alt="" />
+                                  <img className='w-16 h-16 sm:w-[90px] sm:h-[80px] md:w-[90px] md:h-[100px] object-cover sm:mr-[20px] sm:ml-[20px]' src="https://img.icons8.com/color/512/bash.png" alt="" />
                                 </> : ""
                   }
-                  <div  className='font-medium'>
-                    <h3 className='text-xl'>{project.name}</h3>
-                    <p className='text-[14px] text-[gray]'>{new Date(project.date).toDateString()}</p>
+                  <div className='font-medium text-center sm:text-left mt-2 sm:mt-0'>
+                    <h3 className='text-lg sm:text-xl'>{project.name}</h3>
+                    <p className='text-xs sm:text-[14px] text-[gray]'>{new Date(project.date).toDateString()}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-[15px] font-medium">
+                <div className="flex items-center gap-2 sm:gap-[15px] font-medium w-full sm:w-auto justify-center sm:justify-end mt-4 sm:mt-0">
                   <button className="btnNormal bg-blue-500 transition-all hover:bg-blue-600" onClick={() => {
                     setIsEditModelShow(true);
                     setEditProjId(project._id);
@@ -274,17 +277,19 @@ const Home = () => {
             setName("");
           }
         }} className='modelCon flex flex-col items-center justify-center w-screen h-screen fixed top-0 left-0 bg-[rgba(0,0,0,0.5)]'>
-          <div className="modelBox flex flex-col items-start rounded-xl p-[20px] w-[25vw] h-[auto] bg-[#1F2937]">
-            <h3 className='text-xl font-bold text-center'>Create Project</h3>
-            <div className="inputBox">
-              <input onChange={(e) => { setName(e.target.value) }} value={name} type="text" placeholder='Enter your project name' className="text-black" />
+          <div className="modelBox flex flex-col items-start rounded-xl p-[20px] w-full sm:w-[80vw] md:w-[60vw] lg:w-[40vw] xl:w-[25vw] h-[auto] bg-[#1F2937] mx-4">
+            <h3 className='text-xl font-bold text-center w-full'>Create Project</h3>
+            <div className="inputBox w-full">
+              <input onChange={(e) => { setName(e.target.value) }} value={name} type="text" placeholder='Enter your project name' className="text-black w-full" />
             </div>
-            <Select
-              placeholder="Select a Language"
-              options={languageOptions}
-              styles={customStyles}
-              onChange={handleLanguageChange} // Handle language selection
-            />
+            <div className="w-full">
+              <Select
+                placeholder="Select a Language"
+                options={languageOptions}
+                styles={customStyles}
+                onChange={handleLanguageChange} // Handle language selection
+              />
+            </div>
             {selectedLanguage && (
               <>
                 <p className="text-[14px] text-green-500 mt-2">
@@ -305,10 +310,10 @@ const Home = () => {
             setName("");
           }
         }} className='modelCon flex flex-col items-center justify-center w-screen h-screen fixed top-0 left-0 bg-[rgba(0,0,0,0.5)]'>
-          <div className="modelBox flex flex-col items-start rounded-xl p-[20px] w-[25vw] h-[auto] bg-[#1F2937]">
-            <h3 className='text-xl font-bold text-center'>Update Project</h3>
-            <div className="inputBox">
-              <input onChange={(e) => { setName(e.target.value) }} value={name} type="text" placeholder='Enter your project name' className="text-black" />
+          <div className="modelBox flex flex-col items-start rounded-xl p-[20px] w-full sm:w-[80vw] md:w-[60vw] lg:w-[40vw] xl:w-[25vw] h-[auto] bg-[#1F2937] mx-4">
+            <h3 className='text-xl font-bold text-center w-full'>Update Project</h3>
+            <div className="inputBox w-full">
+              <input onChange={(e) => { setName(e.target.value) }} value={name} type="text" placeholder='Enter your project name' className="text-black w-full" />
             </div>
 
             <button onClick={updateProj} className="btnNormal bg-blue-500 transition-all hover:bg-blue-600 mt-2">Update</button>

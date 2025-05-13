@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    fetch(api_base_url + "/signUp",{
+    fetch(api_base_url + "/signUp", {
       mode: "cors",
       method: "POST",
       headers: {
@@ -26,10 +26,10 @@ const SignUp = () => {
         pwd: pwd
       })
     }).then(res => res.json()).then(data => {
-      if(data.success){
+      if (data.success) {
         navigate("/login");
       }
-      else{
+      else {
         toast.error(data.msg);
       }
     })
@@ -37,25 +37,56 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="con flex flex-col items-center justify-center min-h-screen">
-        <form onSubmit={submitForm} className='w-[25vw] h-[auto] flex flex-col items-center bg-[#111827] p-[20px] rounded-lg shadow-xl shadow-black/50'>
-          <img className='w-[230px] object-cover' src={logo} alt="" />
+      <div className="con flex flex-col items-center justify-center min-h-screen px-4 py-6">
+        <form onSubmit={submitForm} className='w-full sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[25vw] max-w-md flex flex-col items-center bg-[#111827] p-5 sm:p-[20px] rounded-lg shadow-xl shadow-black/50'>
+          <img className='w-[150px] sm:w-[180px] md:w-[230px] object-cover mb-4' src={logo} alt="Dev8 IDE Logo" />
 
-          <div className="inputBox">
-            <input onChange={(e)=>{setFullName(e.target.value)}} value={fullName} type="text" placeholder='Full Name' required/>
+          <div className="inputBox w-full mb-3">
+            <label htmlFor="fullName" className="sr-only">Full Name</label>
+            <input
+              id="fullName"
+              onChange={(e) => { setFullName(e.target.value) }}
+              value={fullName}
+              type="text"
+              placeholder='Full Name'
+              className="w-full p-2 rounded border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              required
+            />
           </div>
 
-          <div className="inputBox">
-            <input onChange={(e)=>{setEmail(e.target.value)}} value={email} type="email" placeholder='Email' required/>
+          <div className="inputBox w-full mb-3">
+            <label htmlFor="email" className="sr-only">Email</label>
+            <input
+              id="email"
+              onChange={(e) => { setEmail(e.target.value) }}
+              value={email}
+              type="email"
+              placeholder='Email'
+              className="w-full p-2 rounded border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              required
+            />
           </div>
 
-          <div className="inputBox">
-            <input onChange={(e)=>{setPwd(e.target.value)}} value={pwd} type="password" placeholder='Password' required/>
+          <div className="inputBox w-full mb-4">
+            <label htmlFor="password" className="sr-only">Password</label>
+            <input
+              id="password"
+              onChange={(e) => { setPwd(e.target.value) }}
+              value={pwd}
+              type="password"
+              placeholder='Password'
+              className="w-full p-2 rounded border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              required
+            />
           </div>
 
-          <p className='text-[gray] text-[14px] mt-3 self-start'>Alerady have an account <Link to="/login" className='text-blue-500'>Login</Link></p>
+          <p className='text-gray-400 text-xs sm:text-sm md:text-[14px] mt-1 self-start'>
+            Already have an account? <Link to="/login" className='text-blue-500 hover:text-blue-400 font-medium'>Login</Link>
+          </p>
 
-          <button className="btnNormal mt-3 bg-blue-500 transition-all hover:bg-blue-600">Sign Up</button>
+          <button className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            Sign Up
+          </button>
         </form>
       </div>
     </>
