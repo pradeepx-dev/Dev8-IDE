@@ -24,10 +24,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors(
-  origin: ['https://dev8-steel.vercel.app'], // allow Vercel
-  credentials: true
-));
+const corsOptions = {
+  origin: ["https://dev8-steel.vercel.app"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.static("client/dist")); // or "build"
 
 
