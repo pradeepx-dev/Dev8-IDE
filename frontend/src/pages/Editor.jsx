@@ -113,55 +113,65 @@ const Editor = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="flex flex-col md:flex-row h-[calc(100vh-90px)]">
+  <Navbar />
+  <div className="flex flex-col md:flex-row items-stretch justify-between h-[calc(100vh-90px)]">
+    
+    {/* Editor Side */}
+    <div className="left w-full md:w-1/2 h-1/2 md:h-full relative">
+      {/* Save Button */}
+      <div className="absolute top-3 right-3 z-10">
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-all"
+          onClick={saveProject} // You'll define this
+        >
+          Save
+        </button>
+      </div>
 
-        {/* Left: Editor */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full">
-          <Editor2
-            onChange={(newCode) => {
-              console.log('New Code:', newCode);
-              setCode(newCode || '');
-            }}
-            theme="vs-dark"
-            height="100%"
-            width="100%"
-            language="python"
-            value={code}
-          />
-        </div>
+      <Editor2
+        onChange={(newCode) => {
+          console.log('New Code:', newCode);
+          setCode(newCode || '');
+        }}
+        theme="vs-dark"
+        height="100%"
+        width="100%"
+        language="python"
+        value={code}
+      />
+    </div>
 
-        {/* Right: Output */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full bg-[#27272a] flex flex-col">
-          <div className="flex pb-3 border-b border-[#1e1e1f] items-center justify-between px-6 py-2">
-            <p className="text-white font-medium">Output</p>
-            <div className="flex gap-3">
-              <button
-                className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 transition-all text-sm"
-                onClick={saveProject}
-              >
-                Save
-              </button>
-              <button
-                className="bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600 transition-all text-sm"
-                onClick={runProject}
-              >
-                Run
-              </button>
-            </div>
-          </div>
+    {/* Output Side */}
+    <div className="right p-[15px] w-full md:w-1/2 h-1/2 md:h-full bg-[#27272a] flex flex-col">
+      <div className="flex pb-3 border-b-[1px] border-b-[#1e1e1f] items-center justify-between px-[30px]">
+        <p className="p-0 m-0">Output</p>
 
-          {/* Output display area */}
-          <pre
-            className={`w-full flex-1 overflow-auto px-4 py-2 text-sm ${error ? "text-red-500" : "text-white"
-              }`}
-            style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+        <div className="flex gap-3">
+          <button
+            className="btnNormal !w-fit !px-[20px] bg-red-500 text-white transition-all hover:bg-red-600 rounded-md"
+            onClick={() => {
+    setOutput('');
+    setError(false);
+  }}
           >
-            {output}
-          </pre>
+            Reset
+          </button>
+
+          <button
+            className="btnNormal !w-fit !px-[20px] bg-blue-500 text-white transition-all hover:bg-blue-600 rounded-md"
+            onClick={runProject}
+          >
+            Run
+          </button>
         </div>
       </div>
-    </>
+
+      <pre className={`w-full flex-1 overflow-auto ${error ? "text-red-500" : "text-white"}`}>
+        {output}
+      </pre>
+    </div>
+  </div>
+</>
 
   );
 };

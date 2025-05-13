@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import logo from "../images/logos/Dev8 (1).png";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi'; // Install with: npm install react-icons
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isLoggedIn");
-    window.location.reload();
+    navigate("/login"); 
   };
 
   return (
