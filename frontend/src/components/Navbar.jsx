@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from "../images/logos/Dev8 (1).png";
+import logo from "../images/logos/Dev82.png";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi'; // Install with: npm install react-icons

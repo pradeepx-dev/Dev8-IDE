@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from "../images/logos/logo.png"
+import logo from "../images/logos/Dev82.png"
 import { Link, useNavigate } from 'react-router-dom';
 import { api_base_url } from '../helper';
 import { toast } from 'react-toastify';
@@ -39,7 +39,7 @@ const SignUp = () => {
     <>
       <div className="con flex flex-col items-center justify-center min-h-screen px-4 py-6">
         <form onSubmit={submitForm} className='w-full sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[25vw] max-w-md flex flex-col items-center bg-[#111827] p-5 sm:p-[20px] rounded-lg shadow-xl shadow-black/50'>
-          <img className='w-[150px] sm:w-[180px] md:w-[230px] object-cover mb-4' src={logo} alt="Dev8 IDE Logo" />
+          <img className='w-[150px] h-[100px] sm:w-[180px] md:w-[230px] object-cover mb-4' src={logo} alt="Dev8 IDE Logo" />
 
           <div className="inputBox w-full mb-3">
             <label htmlFor="fullName" className="sr-only">Full Name</label>
