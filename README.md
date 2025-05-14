@@ -7,7 +7,7 @@
 
 Check out the deployed version on **Vercel**:
 
-👉 [https://dev8-steel.vercel.app](https://dev8-steel.vercel.app/)
+👉 [https://dev8-ide.vercel.app](https://dev8-ide.vercel.app)
 
 ---
 
