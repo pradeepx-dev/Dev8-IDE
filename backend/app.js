@@ -26,18 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const allowedOrigins = ['https://dev8-ide.vercel.app', 'https://dev8.onrender.com']; // Add other environments if needed
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true // Only if you're using cookies or Authorization headers
-}));
-
-
+app.use(cors());
 app.use(express.static("client/dist")); // or "build"
 
 
