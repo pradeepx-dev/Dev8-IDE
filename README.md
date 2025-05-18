@@ -7,7 +7,8 @@
 
 Check out the deployed version on **Vercel**:
 
-👉 [https://dev8-ide.vercel.app](https://dev8-ide.vercel.app)
+👉 [dev8.pradeepx.me](https://dev8.pradeepx.me)<br>
+👉 [dev8-ide.vercel.app](https://dev8-ide.vercel.app)
 
 ---
 
@@ -103,9 +104,9 @@ npm run dev
 
 **Pradeep Kumar Maurya**
 
-📧 [Email](mailto:pradeepx135@gmail.com)  
-🔗 [LinkedIn](https://linkedin.com/in/pradeepx)  
-🐙 [GitHub](https://github.com/pradeepx-dev)
+📧 [pradeepx135@gmail.com](mailto:pradeepx135@gmail.com)  
+🔗 [https://linkedin.com/in/pradeepx](https://linkedin.com/in/pradeepx)  
+🐙 [https://github.com/pradeepx-dev](https://github.com/pradeepx-dev)
 
 ---
 
