@@ -3,6 +3,7 @@ import logo from "../images/logos/Dev82.png"
 import { Link, useNavigate } from 'react-router-dom';
 import { api_base_url } from '../helper';
 import { toast } from 'react-toastify';
+import { FiMail, FiLock, FiUser, FiUserPlus, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 
 const SignUp = () => {
 
@@ -37,57 +38,100 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="con flex flex-col items-center justify-center min-h-screen px-4 py-6">
-        <form onSubmit={submitForm} className='w-full sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[25vw] max-w-md flex flex-col items-center bg-[#111827] p-5 sm:p-[20px] rounded-lg shadow-xl shadow-black/50'>
-          <img className='w-[150px] h-[100px] sm:w-[180px] md:w-[230px] object-cover mb-4' src={logo} alt="Dev8 IDE Logo" />
-
-          <div className="inputBox w-full mb-3">
-            <label htmlFor="fullName" className="sr-only">Full Name</label>
-            <input
-              id="fullName"
-              onChange={(e) => { setFullName(e.target.value) }}
-              value={fullName}
-              type="text"
-              placeholder='Full Name'
-              className="w-full p-2 rounded border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              required
-            />
+      <div className="con flex flex-col items-center justify-center min-h-screen px-4 py-6 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-800">
+        <div className="w-full max-w-md">
+          {/* Logo Section */}
+          <div className="text-center mb-8">
+            <div className="inline-block mb-4">
+              <img className='w-[180px] h-[120px] sm:w-[200px] sm:h-[130px] object-cover mx-auto' src={logo} alt="Dev8 IDE Logo" />
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+              Create Account
+            </h1>
+            <p className="text-gray-400 text-sm">Join Dev8 IDE and start coding</p>
           </div>
 
-          <div className="inputBox w-full mb-3">
-            <label htmlFor="email" className="sr-only">Email</label>
-            <input
-              id="email"
-              onChange={(e) => { setEmail(e.target.value) }}
-              value={email}
-              type="email"
-              placeholder='Email'
-              className="w-full p-2 rounded border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              required
-            />
-          </div>
+          {/* Form Card */}
+          <form onSubmit={submitForm} className='w-full flex flex-col bg-gradient-to-br from-dark-900/90 to-dark-800/90 backdrop-blur-xl p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-800/50'>
+            <div className="space-y-4 mb-6">
+              {/* Full Name Input */}
+              <div>
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
+                  Full Name
+                </label>
+                <div className="inputBox relative">
+                  <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+                  <input
+                    id="fullName"
+                    onChange={(e) => { setFullName(e.target.value) }}
+                    value={fullName}
+                    type="text"
+                    placeholder='Enter your full name'
+                    className="w-full pl-12 pr-4"
+                    required
+                  />
+                </div>
+              </div>
 
-          <div className="inputBox w-full mb-4">
-            <label htmlFor="password" className="sr-only">Password</label>
-            <input
-              id="password"
-              onChange={(e) => { setPwd(e.target.value) }}
-              value={pwd}
-              type="password"
-              placeholder='Password'
-              className="w-full p-2 rounded border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              required
-            />
-          </div>
+              {/* Email Input */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email Address
+                </label>
+                <div className="inputBox relative">
+                  <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+                  <input
+                    id="email"
+                    onChange={(e) => { setEmail(e.target.value) }}
+                    value={email}
+                    type="email"
+                    placeholder='Enter your email'
+                    className="w-full pl-12 pr-4"
+                    required
+                  />
+                </div>
+              </div>
 
-          <p className='text-gray-400 text-xs sm:text-sm md:text-[14px] mt-1 self-start'>
-            Already have an account? <Link to="/login" className='text-blue-500 hover:text-blue-400 font-medium'>Login</Link>
-          </p>
+              {/* Password Input */}
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+                  Password
+                </label>
+                <div className="inputBox relative">
+                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+                  <input
+                    id="password"
+                    onChange={(e) => { setPwd(e.target.value) }}
+                    value={pwd}
+                    type="password"
+                    placeholder='Create a password'
+                    className="w-full pl-12 pr-4"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
 
-          <button className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-            Sign Up
-          </button>
-        </form>
+            {/* Submit Button */}
+            <button 
+              type="submit"
+              className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-600/40 flex items-center justify-center gap-2 mb-4"
+            >
+              <FiUserPlus className="text-lg" />
+              <span>Create Account</span>
+              <FiArrowRight className="text-lg" />
+            </button>
+
+            {/* Login Link */}
+            <p className='text-center text-gray-400 text-sm'>
+              Already have an account?{' '}
+              <Link to="/login" className='text-blue-400 hover:text-blue-300 font-semibold hover:underline inline-flex items-center gap-1'>
+                <FiArrowLeft className="text-xs" />
+                Sign In
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </>
   )

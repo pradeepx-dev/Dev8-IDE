@@ -1,51 +1,93 @@
-body{
-  /* background-color: #1a1919; */
-  background-color: #1F2937;
-  color: #fff;
-}
-
-.inputBox{
+/* Modern Input Box */
+.inputBox {
   display: flex;
   align-items: center;
-  background-color: #000000;
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
   width: 100%;
   margin-top: 10px;
-  /* border-radius: 30px; */
+  border-radius: 12px;
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
-.inputBox input{
+.inputBox:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.inputBox input {
   flex: 1;
-  padding: 15px;
+  padding: 14px 16px;
   border: none;
   outline: none;
   background-color: transparent;
   color: #fff;
-  /* border-radius: 30px; */
+  font-size: 15px;
+  font-weight: 400;
 }
 
-.btnNormal{
-  padding: 10px;
+.inputBox input::placeholder {
+  color: #9ca3af;
+}
+
+/* Modern Button */
+.btnNormal {
+  padding: 12px 24px;
   width: 100%;
   border: none;
   outline: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.projects .project{
+.btnNormal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.btnNormal:active {
+  transform: translateY(0);
+}
+
+/* Project Cards */
+.projects .project {
   margin-top: 10px;
   cursor: pointer;
-  transition: .3s;
-  border: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(75, 85, 99, 0.2);
+  backdrop-filter: blur(10px);
 }
 
-.projects .project:hover{
-  /* background-color: #000000; */
-  border: 1px solid #0f0e0e;
+.projects .project:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-.css-b62m3t-container{
+/* React Select Custom Styles */
+.css-b62m3t-container {
   width: 100% !important;
   margin-top: 10px;
-  border-radius: 30px;
+  border-radius: 12px !important;
+}
+
+/* Modal Styles */
+.modelCon {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.modelBox {
+  animation: slideUp 0.3s ease-out;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
