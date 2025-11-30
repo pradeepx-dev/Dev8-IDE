@@ -175,7 +175,7 @@ Dev8 IDE supports the following programming languages:
 ### Code Editor
 ![Code Editor](https://github.com/user-attachments/assets/eab3f35e-7bdd-459d-899a-59c6aebf013b)
 
-### Project Management
+### About Page
 ![Project Management](https://github.com/user-attachments/assets/89a87ad5-a2ed-4972-9e31-e53f2e12a906)
 
 ---
