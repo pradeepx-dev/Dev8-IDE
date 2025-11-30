@@ -60,7 +60,6 @@ const Login = () => {
                   Email Address
                 </label>
                 <div className="inputBox relative">
-                  <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
                   <input 
                     id="email"
                     onChange={(e) => { setEmail(e.target.value) }} 
@@ -79,7 +78,6 @@ const Login = () => {
                   Password
                 </label>
                 <div className="inputBox relative">
-                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
                   <input 
                     id="password"
                     onChange={(e) => { setPwd(e.target.value) }} 
