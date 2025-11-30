@@ -44,9 +44,10 @@ Check out the deployed version on **Vercel**:
 ---
 
 ## 📸 Screenshots
-<img src="https://github.com/user-attachments/assets/b844e27a-f188-4eba-b261-3fe9d489162d" alt="Screenshot1"/>
-<img src="https://github.com/user-attachments/assets/36eacd07-77a7-452b-9c15-1e1aa3c4ef0d" alt="Screenshot2"/>
-<img src="https://github.com/user-attachments/assets/c656521f-d11d-4568-897c-c840940dc02c" alt="Screenshot3"/>
+<img width="3198" height="1660" alt="image" src="https://github.com/user-attachments/assets/8c4ade92-4f00-4db4-a82c-16b13150dc86" />
+<img width="3199" height="1656" alt="image" src="https://github.com/user-attachments/assets/eab3f35e-7bdd-459d-899a-59c6aebf013b" />
+<img width="3199" height="1663" alt="image" src="https://github.com/user-attachments/assets/89a87ad5-a2ed-4972-9e31-e53f2e12a906" />
+
 
 --- 
 
