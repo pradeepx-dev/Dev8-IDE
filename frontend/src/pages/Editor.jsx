@@ -4,7 +4,7 @@ import Editor2 from '@monaco-editor/react';
 import { useParams } from 'react-router-dom';
 import { api_base_url } from '../helper';
 import { toast } from 'react-toastify';
-import { FiSave, FiPlay, FiRotateCcw, FiTerminal, FiCode, FiCheckCircle, FiLoader } from 'react-icons/fi';
+import { FiSave, FiPlay, FiRotateCcw, FiTerminal, FiCode, FiCheckCircle, FiLoader, FiEdit3 } from 'react-icons/fi';
 
 const Editor = () => {
   const [code, setCode] = useState(""); // State to hold the code
@@ -13,6 +13,8 @@ const Editor = () => {
   const [error, setError] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [userInput, setUserInput] = useState(""); // User input (stdin)
+  const [showInput, setShowInput] = useState(false); // Toggle input panel
   const editorRef = useRef(null);
   const [data, setData] = useState(null);
 
@@ -23,10 +25,25 @@ const Editor = () => {
   const handleEditorDidMount = useCallback((editor, monaco) => {
     editorRef.current = editor;
     
-    // Fix cursor and input issues
-    editor.focus();
+    // Fix cursor and input issues for desktop
+    const focusEditor = () => {
+      if (editor && !editor.hasTextFocus()) {
+        editor.focus();
+        // Force cursor to be visible
+        const position = editor.getPosition();
+        if (position) {
+          editor.setPosition(position);
+          editor.revealLineInCenter(position.lineNumber);
+        }
+      }
+    };
     
-    // Enable better cursor behavior
+    // Focus immediately
+    setTimeout(() => {
+      focusEditor();
+    }, 100);
+    
+    // Enable better cursor behavior for desktop
     editor.updateOptions({
       cursorStyle: 'line',
       cursorWidth: 2,
@@ -39,6 +56,10 @@ const Editor = () => {
       acceptSuggestionOnEnter: 'on',
       tabCompletion: 'on',
       wordBasedSuggestions: 'matchingDocuments',
+      // Fix cursor visibility on desktop
+      renderValidationDecorations: 'on',
+      hideCursorInOverviewRuler: false,
+      overviewRulerLanes: 3,
     });
 
     // Add keyboard shortcuts
@@ -48,14 +69,43 @@ const Editor = () => {
       }
     });
 
-    // Fix input handling
+    // Fix input handling and cursor visibility
     editor.onDidChangeModelContent(() => {
       // Ensure cursor is visible
       const position = editor.getPosition();
       if (position) {
         editor.revealLineInCenter(position.lineNumber);
+        // Force cursor update
+        editor.setPosition(position);
       }
     });
+
+    // Handle mouse clicks to ensure cursor works
+    editor.onMouseDown((e) => {
+      if (e.target.type === monaco.editor.MouseTargetType.CONTENT_TEXT) {
+        setTimeout(() => {
+          focusEditor();
+        }, 0);
+      }
+    });
+
+    // Handle keyboard events to ensure cursor is active
+    editor.onKeyDown((e) => {
+      // Force focus on any key press
+      if (!editor.hasTextFocus()) {
+        editor.focus();
+      }
+    });
+
+    // Ensure editor container can receive focus
+    const editorContainer = editor.getContainerDomNode();
+    if (editorContainer) {
+      editorContainer.setAttribute('tabindex', '0');
+      editorContainer.addEventListener('click', (e) => {
+        e.preventDefault();
+        focusEditor();
+      });
+    }
   }, []);
 
   // Fetch project data on mount
@@ -260,7 +310,7 @@ const Editor = () => {
       language: language,
       version: data.version || '*',
       files: files,
-      stdin: '',
+      stdin: userInput || '', // Use user input as stdin
       args: []
     };
 
@@ -381,12 +431,30 @@ const Editor = () => {
           </div>
 
           {/* Monaco Editor */}
-          <div className="flex-1 relative" onMouseDown={(e) => {
-            // Ensure editor gets focus on click
-            if (editorRef.current) {
-              setTimeout(() => editorRef.current.focus(), 0);
-            }
-          }}>
+          <div 
+            className="flex-1 relative"
+            style={{ outline: 'none' }}
+            onMouseDown={(e) => {
+              // Ensure editor gets focus on click (desktop fix)
+              e.preventDefault();
+              if (editorRef.current) {
+                setTimeout(() => {
+                  editorRef.current.focus();
+                  const position = editorRef.current.getPosition();
+                  if (position) {
+                    editorRef.current.setPosition(position);
+                  }
+                }, 0);
+              }
+            }}
+            onFocus={(e) => {
+              // Ensure editor gets focus when container is focused
+              if (editorRef.current && !editorRef.current.hasTextFocus()) {
+                editorRef.current.focus();
+              }
+            }}
+            tabIndex={0}
+          >
             <Editor2
               onMount={handleEditorDidMount}
               onChange={(newCode) => {
@@ -417,7 +485,7 @@ const Editor = () => {
                 cursorSmoothCaretAnimation: 'on',
                 cursorStyle: 'line',
                 cursorWidth: 2,
-                // Fix input and cursor issues
+                // Fix input and cursor issues for desktop
                 readOnly: false,
                 domReadOnly: false,
                 contextmenu: true,
@@ -454,6 +522,10 @@ const Editor = () => {
                 foldingStrategy: 'auto',
                 showFoldingControls: 'always',
                 unfoldOnClickAfterEndOfLine: true,
+                // Cursor visibility fixes for desktop
+                hideCursorInOverviewRuler: false,
+                overviewRulerLanes: 3,
+                renderValidationDecorations: 'on',
                 // Scrollbar
                 scrollbar: {
                   vertical: 'auto',
@@ -488,10 +560,19 @@ const Editor = () => {
 
             <div className="flex gap-2">
               <button
+                className="flex items-center gap-2 px-3 py-2 bg-dark-800 hover:bg-yellow-600 text-gray-300 hover:text-white transition-all rounded-lg border border-gray-700/50 hover:border-yellow-500/50 text-sm"
+                onClick={() => setShowInput(!showInput)}
+                title="Toggle Input Panel"
+              >
+                <FiEdit3 className="text-base" />
+                <span className="hidden sm:inline">Input</span>
+              </button>
+              <button
                 className="flex items-center gap-2 px-3 py-2 bg-dark-800 hover:bg-red-600 text-gray-300 hover:text-white transition-all rounded-lg border border-gray-700/50 hover:border-red-500/50 text-sm"
                 onClick={() => {
                   setOutput('');
                   setError(false);
+                  setUserInput('');
                 }}
                 title="Clear Output"
               >
@@ -514,6 +595,26 @@ const Editor = () => {
               </button>
             </div>
           </div>
+
+          {/* User Input Panel */}
+          {showInput && (
+            <div className="px-4 py-3 bg-dark-800/50 border-b border-gray-800/50">
+              <div className="flex items-center gap-2 mb-2">
+                <FiEdit3 className="text-yellow-400 text-sm" />
+                <label className="text-sm font-medium text-gray-300">Input (stdin):</label>
+              </div>
+              <textarea
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                placeholder="Enter input for your program (e.g., for Python: input(), for C/C++: scanf())"
+                className="w-full px-3 py-2 bg-dark-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 focus:border-yellow-500/50 font-mono text-sm resize-none"
+                rows={3}
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                This input will be passed to your program as stdin when you run it.
+              </p>
+            </div>
+          )}
 
           {/* Output Content */}
           <div className="flex-1 overflow-auto p-4">
